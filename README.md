@@ -51,6 +51,19 @@ es
 ### 需要注意的是 elasticsearch 第一次用的时候，需要初始化密码 执行下面的操作
 ```bash
 ➜ ~ docker exec -it es /bin/bash
+
+#修改es配置文件elasticsearch.yml
+vi /usr/share/elasticsearch/config/elasticsearch.yml
+#添加以下内容
+xpack.security.enabled: true
+xpack.license.self_generated.type: basic
+xpack.security.transport.ssl.enabled: true
+#保存后退出docker容器
+exit
+#重启es
+docker restart es
+
+
 [root@04b37b58f104 elasticsearch]# sh /usr/share/elasticsearch/bin/elasticsearch-setup-passwords auto
 Initiating the setup of passwords for reserved users elastic,apm_system,kibana,logstash_system,beats_system,remote_monitoring_user.
 The passwords will be randomly generated and printed to the console.

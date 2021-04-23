@@ -27,7 +27,7 @@ rm -rf $(pwd)/etcd && mkdir -p $(pwd)/etcd && \
   -p 2380:2380 \
   --mount type=bind,source=$(pwd)/etcd,destination=/etcd-data \
   --name etcd \
-  bitnami/etcd \
+  quay.io/coreos/etcd \
   /usr/local/bin/etcd \
   --name s1 \
   --data-dir /etcd-data \
