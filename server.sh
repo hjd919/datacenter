@@ -5,7 +5,7 @@
 ##### 启动mysql 服务
 docker kill mysql
 docker rm mysql
-docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin -v $(pwd)/mysql8:/var/lib/mysql -d mysql:8.0.21
+docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin -v $(pwd)/mysql8:/var/lib/mysql -d mysql:8.0.22
 
 ##### 启动redis 服务
 docker stop redis
@@ -15,7 +15,7 @@ docker run --name redis -d \
   --publish 6379:6379 \
   --env 'REDIS_PASSWORD=admin' \
   --volume $(pwd)/redis:/var/lib/redis \
-  sameersbn/redis:latest
+  redis:6.0.6
 
 ### 启动 etcd 服务
 #!/bin/bash
@@ -27,7 +27,7 @@ rm -rf $(pwd)/etcd && mkdir -p $(pwd)/etcd && \
   -p 2380:2380 \
   --mount type=bind,source=$(pwd)/etcd,destination=/etcd-data \
   --name etcd \
-  quay.io/coreos/etcd \
+  bitnami/etcd \
   /usr/local/bin/etcd \
   --name s1 \
   --data-dir /etcd-data \
@@ -48,4 +48,4 @@ docker run -d --name es \
 	-p 9200:9200 -p 9300:9300 \
 	-e "discovery.type=single-node" \
 	-v $(pwd)/elasticsearch:/usr/share/elasticsearch/data \
-	spencezhou/elasticsearch:7.6.2
+	elasticsearch:7.4.0
