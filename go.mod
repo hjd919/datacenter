@@ -3,7 +3,7 @@ module datacenter
 go 1.15
 
 require (
-	github.com/antlr/antlr4 v0.0.0-20210404160547-4dfacf63e228 // indirect
+	github.com/antlr/antlr4 v0.0.0-20210412152734-e404d26f6142 // indirect
 	github.com/chanxuehong/wechat v0.0.0-20201110083048-0180211b69fd
 	github.com/dchest/siphash v1.2.1 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible

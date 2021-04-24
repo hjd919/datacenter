@@ -1,4 +1,3 @@
-
 //注册请求
 type RegisterReq struct {
 	// TODO: add members here and delete this comment

@@ -8,5 +8,9 @@ goctl api -o user.api
 ### 生成user api服务
 ```
 goctl api go -api user.api -dir .
+```
 
+### 进入微服务目录
+```
 goctl rpc proto -src user.proto -dir .
+```
