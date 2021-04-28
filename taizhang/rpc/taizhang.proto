@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package taizhang;
+
+//请求的api
+message TaizhangReq {
+  int64 id=1;
+}
+
+//返回的值
+message TaizhangResp {
+  int64 id=1;
+  string appid=2;
+}
+
+service Taizhang {
+  rpc GetTaizhang(TaizhangReq) returns(TaizhangResp);
+}

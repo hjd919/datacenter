@@ -58,6 +58,6 @@ RpcServerPlus ${getewayPath} search
 #问答抽奖服务
 RpcServerPlus ${getewayPath} questions
 #Api服务
-StartServer ${getewayPath} ${geteWayApi} ${geteWayCnf}
+#StartServer ${getewayPath} ${geteWayApi} ${geteWayCnf}
 
 

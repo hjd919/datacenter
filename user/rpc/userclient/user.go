@@ -14,17 +14,17 @@ import (
 )
 
 type (
+	Response         = user.Response
 	Request          = user.Request
 	RegisterReq      = user.RegisterReq
-	LoginReq         = user.LoginReq
 	UserReply        = user.UserReply
-	JwtToken         = user.JwtToken
-	AppConfigResp    = user.AppConfigResp
 	UserReq          = user.UserReq
 	AppConfigReq     = user.AppConfigReq
-	AppUserResp      = user.AppUserResp
 	AppUserLoginResp = user.AppUserLoginResp
-	Response         = user.Response
+	AppConfigResp    = user.AppConfigResp
+	LoginReq         = user.LoginReq
+	JwtToken         = user.JwtToken
+	AppUserResp      = user.AppUserResp
 
 	User interface {
 		Ping(ctx context.Context, in *Request) (*Response, error)

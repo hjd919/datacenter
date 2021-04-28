@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+
+  mysql:
+    image: mysql:8.0.22
+    container_name: mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./etc:/etc/mysql/conf.d:ro
+      - ./logs:/var/log/mysql
+      - ./backup:/usr/local/mysql/backup
+      - ./shell:/usr/local/mysql/shell
+      - mysql_data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+volumes:
+  mysql_data:

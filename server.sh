@@ -5,7 +5,7 @@
 ##### 启动mysql 服务
 docker kill mysql
 docker rm mysql
-docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin -v $(pwd)/mysql8:/var/lib/mysql -d mysql:8.0.22
+# docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=admin -v $(pwd)/mysql8:/var/lib/mysql -d mysql:8.0.22 --default-authentication-plugin=mysql_native_password
 
 ##### 启动redis 服务
 docker stop redis

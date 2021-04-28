@@ -1,0 +1,20 @@
+
+
+type ListReq struct {
+	Id       int64  `json:"id"` // 作品id
+}
+type ListResp struct {
+	Id       int64  `json:"id"` //投票票数
+	Name       int64  `json:"name"` //浏览数
+}
+
+@server(
+	group: taizhang
+)
+service datacenter-api {
+	@doc(
+		summary: "台账"
+	)
+	@handler game
+	get /games/getlist (ListReq) returns (ListResp)
+}
