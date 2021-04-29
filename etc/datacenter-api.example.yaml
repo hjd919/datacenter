@@ -7,9 +7,9 @@ Auth:
   AccessSecret: ad87xxxxxxx5d54b7d
   AccessExpire: 86400
 CacheRedis:
-- Host: 127.0.0.1:6379
-  Pass: admin
-  Type: node    
+  - Host: 127.0.0.1:6379
+    Pass: admin
+    Type: node
 UserRpc:
   Etcd:
     Hosts:
@@ -24,7 +24,7 @@ VotesRpc:
   Etcd:
     Hosts:
       - 127.0.0.1:2379
-    Key: votes.rpc    
+    Key: votes.rpc
 SearchRpc:
   Etcd:
     Hosts:
@@ -34,4 +34,9 @@ QuestionsRpc:
   Etcd:
     Hosts:
       - 127.0.0.1:2379
-    Key: questions.rpc                 
+    Key: questions.rpc
+TaizhangRpc:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: taizhang.rpc
