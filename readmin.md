@@ -14,3 +14,10 @@ goctl api go -api user.api -dir .
 ```
 goctl rpc proto -src user.proto -dir .
 ```
+
+生成api服务
+```
+goctl api go -api datacenter.api -dir .
+
+```
+生成模型

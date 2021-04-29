@@ -2,14 +2,10 @@ package svc
 
 import (
 	"context"
-	"datacenter/common/rpc/commonclient"
 	"datacenter/internal/config"
 	"datacenter/internal/middleware"
-	"datacenter/questions/rpc/questionsclient"
-	"datacenter/search/rpc/searchclient"
 	"datacenter/shared"
-	"datacenter/user/rpc/userclient"
-	"datacenter/votes/rpc/votesclient"
+	"datacenter/taizhang/rpc/taizhangclient"
 	"fmt"
 	"net/http"
 	"time"
@@ -29,13 +25,15 @@ type ServiceContext struct {
 	GreetMiddleware2 rest.Middleware
 	Usercheck        rest.Middleware
 	Admincheck       rest.Middleware
-	UserRpc          userclient.User           //用户
-	CommonRpc        commonclient.Common       //公共
-	VotesRpc         votesclient.Votes         //投票
-	SearchRpc        searchclient.Search       //搜索
-	QuestionsRpc     questionsclient.Questions //问答抽奖
-	Cache            cache.Cache
-	RedisConn        *redis.Redis
+	//UserRpc          userclient.User           //用户
+	//CommonRpc        commonclient.Common       //公共
+	//VotesRpc         votesclient.Votes         //投票
+	//SearchRpc        searchclient.Search       //搜索
+	//QuestionsRpc     questionsclient.Questions //问答抽奖
+	TaizhangRpc      taizhangclient.Taizhang   // 台账
+
+	Cache     cache.Cache
+	RedisConn *redis.Redis
 }
 
 func timeInterceptor(ctx context.Context, method string, req, reply interface{}, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) error {
@@ -50,11 +48,12 @@ func timeInterceptor(ctx context.Context, method string, req, reply interface{},
 }
 func NewServiceContext(c config.Config) *ServiceContext {
 
-	ur := userclient.NewUser(zrpc.MustNewClient(c.UserRpc, zrpc.WithUnaryClientInterceptor(timeInterceptor)))
-	cr := commonclient.NewCommon(zrpc.MustNewClient(c.CommonRpc, zrpc.WithUnaryClientInterceptor(timeInterceptor)))
-	vr := votesclient.NewVotes(zrpc.MustNewClient(c.VotesRpc, zrpc.WithUnaryClientInterceptor(timeInterceptor)))
-	sr := searchclient.NewSearch(zrpc.MustNewClient(c.SearchRpc, zrpc.WithUnaryClientInterceptor(timeInterceptor)))
-	qr := questionsclient.NewQuestions(zrpc.MustNewClient(c.QuestionsRpc, zrpc.WithUnaryClientInterceptor(timeInterceptor)))
+	//ur := userclient.NewUser(zrpc.MustNewClient(c.UserRpc, zrpc.WithUnaryClientInterceptor(timeInterceptor)))
+	//cr := commonclient.NewCommon(zrpc.MustNewClient(c.CommonRpc, zrpc.WithUnaryClientInterceptor(timeInterceptor)))
+	//vr := votesclient.NewVotes(zrpc.MustNewClient(c.VotesRpc, zrpc.WithUnaryClientInterceptor(timeInterceptor)))
+	//sr := searchclient.NewSearch(zrpc.MustNewClient(c.SearchRpc, zrpc.WithUnaryClientInterceptor(timeInterceptor)))
+	//qr := questionsclient.NewQuestions(zrpc.MustNewClient(c.QuestionsRpc, zrpc.WithUnaryClientInterceptor(timeInterceptor)))
+	tr := taizhangclient.NewTaizhang(zrpc.MustNewClient(c.TaizhangRpc, zrpc.WithUnaryClientInterceptor(timeInterceptor))) //api访问rpc句柄
 	//缓存
 	ca := cache.New(c.CacheRedis, syncx.NewSharedCalls(), cache.NewStat("dc"), shared.ErrNotFound)
 	rcon := redis.NewRedis(c.CacheRedis[0].Host, c.CacheRedis[0].Type, c.CacheRedis[0].Pass)
@@ -64,11 +63,12 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		GreetMiddleware2: greetMiddleware2,
 		Usercheck:        middleware.NewUserCheckMiddleware().Handle,
 		Admincheck:       middleware.NewAdminCheckMiddleware().Handle,
-		UserRpc:          ur,
-		CommonRpc:        cr,
-		VotesRpc:         vr,
-		SearchRpc:        sr,
-		QuestionsRpc:     qr,
+		//UserRpc:          ur,
+		//CommonRpc:        cr,
+		//VotesRpc:         vr,
+		//SearchRpc:        sr,
+		//QuestionsRpc:     qr,
+		TaizhangRpc:      tr, //
 		Cache:            ca,
 		RedisConn:        rcon,
 	}

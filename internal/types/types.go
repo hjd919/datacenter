@@ -200,7 +200,7 @@ type AwardConvertReq struct {
 }
 
 type ListReq struct {
-	Id int64 `json:"id"` // 作品id
+	Id int64 `form:"id"` // 作品id
 }
 
 type ListResp struct {

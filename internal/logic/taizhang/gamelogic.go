@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"datacenter/taizhang/rpc/taizhang"
 
 	"datacenter/internal/svc"
 	"datacenter/internal/types"
@@ -23,8 +24,16 @@ func NewGameLogic(ctx context.Context, svcCtx *svc.ServiceContext) GameLogic {
 	}
 }
 
-func (l *GameLogic) Game(req types.ListReq) (*types.ListResp, error) {
-	// todo: add your logic here and delete this line
+func (l *GameLogic) Game(req types.ListReq) (res *types.ListResp, err error) {
+	taizhangInfo, err := l.svcCtx.TaizhangRpc.GetTaizhang(l.ctx, &taizhang.TaizhangReq{
+		Id: 1,
+	})
+	if err != nil {
+		return
+	}
 
-	return &types.ListResp{}, nil
+	return &types.ListResp{
+		Id:   taizhangInfo.Id,
+		Name: taizhangInfo.Id,
+	}, nil
 }

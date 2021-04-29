@@ -18,6 +18,7 @@ type Config struct {
 	VotesRpc     zrpc.RpcClientConf
 	SearchRpc    zrpc.RpcClientConf
 	QuestionsRpc zrpc.RpcClientConf
+	TaizhangRpc  zrpc.RpcClientConf
 
 	CacheRedis cache.ClusterConf
 }

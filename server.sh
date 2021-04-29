@@ -49,3 +49,5 @@ docker run -d --name es \
 	-e "discovery.type=single-node" \
 	-v $(pwd)/elasticsearch:/usr/share/elasticsearch/data \
 	elasticsearch:7.4.0
+
+docker-compose up -d
